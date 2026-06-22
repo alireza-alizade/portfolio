@@ -21,33 +21,52 @@ export default function NavBar() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
+  useEffect(() => {
+    history.scrollRestoration = "manual";
+
+    const html = document.documentElement;
+    const prevBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+
+    window.scrollTo(0, 0);
+
+    const hash = window.location.hash;
+    if (hash) {
+      const el = document.getElementById(hash.replace("#", ""));
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+          html.style.scrollBehavior = prevBehavior;
+        }, 100);
+        return;
+      }
+    }
+
+    html.style.scrollBehavior = prevBehavior;
+  }, []);
+
   const links = [
     { href: "/", label: "Home" },
-    { href: "/projects", label: "Projects" },
-    { href: "/skills", label: "Skills" },
-    { href: "/blog", label: "Blog" },
-    { href: "/contact", label: "Contact" },
+    { href: "#projects", label: "Projects" },
+    { href: "#expertise", label: "Expertise" },
+    { href: "#contact", label: "Contact" },
   ];
 
-  function scrollToSection(href: string) {
-    const id = href.replace("/", "");
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  }
-
-  function handleNav(e: React.MouseEvent, link: (typeof links)[0]) {
-    if (pathname === "/" && link.href !== "/") {
+  function handleNav(e: React.MouseEvent, href: string) {
+    if (href.startsWith("#")) {
       e.preventDefault();
-      scrollToSection(link.href);
+      const id = href.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
       setMenuOpen(false);
     }
   }
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
-    return pathname.startsWith(href);
+    return false;
   };
 
   return (
@@ -62,7 +81,7 @@ export default function NavBar() {
             <Link
               key={link.href}
               href={link.href}
-              onClick={(e) => handleNav(e, link)}
+              onClick={(e) => handleNav(e, link.href)}
               className={`relative text-sm no-underline px-4 py-2 rounded-xl transition-all ${
                 isActive(link.href)
                   ? "text-fg bg-white/15 border border-white/20"
@@ -102,7 +121,7 @@ export default function NavBar() {
             <Link
               key={link.href}
               href={link.href}
-              onClick={(e) => handleNav(e, link)}
+              onClick={(e) => handleNav(e, link.href)}
               className={`text-sm no-underline px-4 py-3 rounded-xl transition-all ${
                 isActive(link.href)
                   ? "text-fg bg-white/15 border border-white/20"

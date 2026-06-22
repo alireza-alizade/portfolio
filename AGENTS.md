@@ -13,10 +13,10 @@ Frontend `:3000`, backend API `:8000`, admin `/admin/`.
 ## Backend (`backend/`)
 
 - Python 3.12, Django 5.1, DRF, SQLite
-- Apps in `portfolio/apps/`: `projects`, `skills`, `blog`, `contact`
+- Apps in `portfolio/apps/`: `projects`, `skills`, `blog`, `contact`, `certificates`
 - All viewsets read-only except contact (create-only)
 - Blog posts store markdown in `content_markdown` field
-- API: `/api/projects/`, `/api/skills/`, `/api/blog/`, `/api/blog/tags/`, `/api/contact/`
+- API: `/api/projects/`, `/api/skills/`, `/api/blog/`, `/api/blog/tags/`, `/api/contact/`, `/api/certificates/`
 - **Migrations use `--run-syncdb`** — no `migrations/` dirs exist. `manage.py migrate --run-syncdb` creates tables directly from models.
 - Dockerfile CMD is `gunicorn`, but `docker-compose.yml` overrides it to `runserver 0.0.0.0:8000`
 - Compose runs `migrate --run-syncdb` as part of the startup command
@@ -27,8 +27,8 @@ Frontend `:3000`, backend API `:8000`, admin `/admin/`.
 - Tailwind CSS v4 via `@tailwindcss/postcss` — no `tailwind.config.*`
 - Custom `@theme` colors in `globals.css` used as Tailwind utilities: `bg-bg`, `text-fg-secondary`, `border-accent`, etc.
 - Clean minimal dark theme: bg `#09090b`, accent blue `#3b82f6`, font Inter
-- `<NavBar>` + `<Footer>` in root layout — pages do NOT import them
-- Pages are server components; only `NavBar`, `ContactForm`, `MarkdownContent` are `"use client"`
+- `<NavBar>`, `<ScrollIndicator>`, `<Footer>` in root layout — pages do NOT import them
+- Pages are server components; only `NavBar`, `ScrollIndicator`, `ContactForm`, `MarkdownContent` are `"use client"`
 - API client in `src/lib/api.ts` — all calls typed, uses `cache: "no-store"` to prevent Next.js from caching fetch results at build time (which would bake error states into static pages)
 - `NEXT_PUBLIC_API_URL` is a compose runtime env (not a build-arg) — unreachable during Docker build
 - `next.config.ts` rewrites `/api/*` → backend

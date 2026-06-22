@@ -47,15 +47,6 @@ export interface SkillCategory {
   skills: Skill[];
 }
 
-export interface PostListItem {
-  id: number;
-  title: string;
-  slug: string;
-  excerpt: string;
-  tags: string[];
-  published_at: string | null;
-}
-
 export interface Certificate {
   id: number;
   title: string;
@@ -66,18 +57,8 @@ export interface Certificate {
   order: number;
 }
 
-export interface Post extends PostListItem {
-  content_markdown: string;
-  created_at: string;
-  updated_at: string;
-}
-
 export function getProjects() {
   return fetchAPI<{ results: Project[] }>("/projects/");
-}
-
-export function getProject(slug: string) {
-  return fetchAPI<Project>(`/projects/${slug}/`);
 }
 
 export function getSkills() {
@@ -86,18 +67,6 @@ export function getSkills() {
 
 export function getCertificates() {
   return fetchAPI<{ results: Certificate[] }>("/certificates/");
-}
-
-export function getPosts() {
-  return fetchAPI<{ results: PostListItem[] }>("/blog/");
-}
-
-export function getPost(slug: string) {
-  return fetchAPI<Post>(`/blog/${slug}/`);
-}
-
-export function getTags() {
-  return fetchAPI<string[]>("/blog/tags/");
 }
 
 export function submitContact(data: { name: string; email: string; subject: string; message: string }) {

@@ -6,13 +6,13 @@ export default function Footer() {
           &copy; {new Date().getFullYear()} &mdash; built with Next.js + Django
         </p>
         <div className="flex items-center gap-2">
-          <a href="/projects" className="text-sm text-fg-muted hover:text-fg px-3 py-1.5 rounded-xl hover:bg-white/10 transition-all no-underline">
+          <a href="#projects" className="text-sm text-fg-muted hover:text-fg px-3 py-1.5 rounded-xl hover:bg-white/10 transition-all no-underline">
             Projects
           </a>
-          <a href="/blog" className="text-sm text-fg-muted hover:text-fg px-3 py-1.5 rounded-xl hover:bg-white/10 transition-all no-underline">
-            Blog
+          <a href="#expertise" className="text-sm text-fg-muted hover:text-fg px-3 py-1.5 rounded-xl hover:bg-white/10 transition-all no-underline">
+            Expertise
           </a>
-          <a href="/contact" className="text-sm text-fg-muted hover:text-fg px-3 py-1.5 rounded-xl hover:bg-white/10 transition-all no-underline">
+          <a href="#contact" className="text-sm text-fg-muted hover:text-fg px-3 py-1.5 rounded-xl hover:bg-white/10 transition-all no-underline">
             Contact
           </a>
         </div>
