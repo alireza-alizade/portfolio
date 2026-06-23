@@ -74,7 +74,7 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-blur-in" style={{ animationDelay: "450ms" }}>
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-accent text-white font-semibold text-sm hover:bg-accent-hover hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg shadow-accent/25"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-surface text-fg font-semibold text-sm border border-border hover:bg-surface-hover hover:border-accent/30 hover:scale-105 active:scale-95 transition-all duration-300"
           >
             View My Work
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
