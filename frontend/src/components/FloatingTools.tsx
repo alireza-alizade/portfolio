@@ -56,31 +56,20 @@ const tiles: {
   { icon: SiRedis, label: "Redis", x: "42%", y: "15%", rotate: -16, size: "sm", speed: 0.4, animDelay: "2.1s", animDuration: "6s" },
 ];
 
-const sizeMap = {
-  sm: "w-10 h-10",
-  md: "w-12 h-12",
-  lg: "w-14 h-14",
-};
-
-const iconSizeMap = {
-  sm: "w-5 h-5",
-  md: "w-6 h-6",
-  lg: "w-7 h-7",
-};
+const sizeMap = { sm: "w-10 h-10", md: "w-12 h-12", lg: "w-14 h-14" };
+const iconSizeMap = { sm: "w-5 h-5", md: "w-6 h-6", lg: "w-7 h-7" };
 
 export default function FloatingTools() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const els = containerRef.current?.querySelectorAll<HTMLElement>("data-tile");
+    const els = containerRef.current?.querySelectorAll<HTMLElement>("[data-tile]");
     if (!els?.length) return;
 
     let raf: number;
     let scrollY = 0;
 
-    const onScroll = () => {
-      scrollY = window.scrollY;
-    };
+    const onScroll = () => { scrollY = window.scrollY; };
 
     const animate = () => {
       els.forEach((el) => {
@@ -121,15 +110,13 @@ export default function FloatingTools() {
               left: tile.x,
               top: tile.y,
               transform: `rotate(${tile.rotate}deg)`,
-              animationDelay: tile.animDelay,
-              animationDuration: tile.animDuration,
             }}
           >
             <div
-              className={`${sizeMap[tile.size]} rounded-2xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] flex items-center justify-center animate-float-${i % 3}`}
+              className={`${sizeMap[tile.size]} rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] flex items-center justify-center animate-float-${i % 3}`}
               style={{ animationDelay: tile.animDelay, animationDuration: tile.animDuration }}
             >
-              <Icon className={`${iconSizeMap[tile.size]} text-white/20`} />
+              <Icon className={`${iconSizeMap[tile.size]} text-white/15`} />
             </div>
           </div>
         );
