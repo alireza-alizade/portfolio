@@ -1,34 +1,15 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { FiArrowRight, FiDownload } from "react-icons/fi";
 
 export default function HeroSection() {
-  const spotlightRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!spotlightRef.current) return;
-      const rect = spotlightRef.current.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      spotlightRef.current.style.setProperty("--x", `${x}%`);
-      spotlightRef.current.style.setProperty("--y", `${y}%`);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
   return (
     <section
       id="hero"
-      ref={spotlightRef}
-      className="spotlight relative min-h-[90vh] flex flex-col items-center justify-center px-6 overflow-hidden"
+      className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 overflow-hidden"
     >
       {/* Background layers */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 mesh-gradient" />
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-accent-cyan/5 blur-[150px] animate-pulse-soft" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent-purple/5 blur-[120px] animate-pulse-soft" style={{ animationDelay: "2s" }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[180px] animate-pulse-soft" style={{ animationDelay: "1s" }} />
@@ -55,10 +36,7 @@ export default function HeroSection() {
 
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[0.9] mb-6 animate-blur-in">
           <span className="text-fg">Hi, I'm </span>
-          <span className="relative">
-            <span className="gradient-text">Alireza</span>
-            <span className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-accent-cyan via-accent to-accent-purple rounded-full opacity-60" />
-          </span>
+          <span className="gradient-text">Alireza</span>
         </h1>
 
         <h2 className="text-xl sm:text-2xl text-fg-secondary font-medium mb-4 animate-blur-in" style={{ animationDelay: "150ms" }}>
@@ -88,9 +66,6 @@ export default function HeroSection() {
           </a>
         </div>
       </div>
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg to-transparent pointer-events-none" />
     </section>
   );
 }

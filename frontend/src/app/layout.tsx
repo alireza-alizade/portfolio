@@ -38,6 +38,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
+        {/* Subtle ambient gradient */}
+        <div className="fixed inset-0 -z-20 pointer-events-none opacity-30">
+          <div className="absolute inset-0 mesh-gradient" />
+        </div>
+
         {/* Noise overlay */}
         <div className="noise-overlay" />
 

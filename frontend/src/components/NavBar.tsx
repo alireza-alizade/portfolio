@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { FiMenu, FiX, FiChevronRight } from "react-icons/fi";
+import { FiMenu, FiX, FiChevronRight, FiDownload } from "react-icons/fi";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -130,14 +130,14 @@ export default function NavBar() {
       </header>
 
       <div
-        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-xl md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 z-40 bg-black/20 backdrop-blur-sm md:hidden transition-opacity duration-300 ${
           menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setMenuOpen(false)}
       />
 
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-72 bg-black/70 backdrop-blur-2xl border-l border-border md:hidden transform transition-transform duration-300 ease-out ${
+        className={`fixed top-0 right-0 z-50 h-full w-72 bg-transparent backdrop-blur-2xl border-l border-border/50 md:hidden transform transition-transform duration-300 ease-out ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -153,6 +153,23 @@ export default function NavBar() {
               <FiChevronRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
             </Link>
           ))}
+          
+          <div className="mt-6 pt-6 border-t border-border/30">
+            <div className="px-4 py-3 rounded-xl bg-gradient-to-r from-accent-cyan/10 to-accent-purple/10 border border-accent/20">
+              <h3 className="text-xs font-semibold text-fg mb-2">Quick Suggestion</h3>
+              <p className="text-xs text-fg-secondary leading-relaxed">
+                Have a project in mind? Let me know your requirements and I'll suggest the best DevOps approach for your needs.
+              </p>
+              <Link
+                href="#contact"
+                onClick={(e) => handleNav(e, "#contact")}
+                className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-accent hover:text-accent-hover transition-colors"
+              >
+                Send a suggestion
+                <FiChevronRight className="w-3 h-3" />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </>

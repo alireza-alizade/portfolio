@@ -6,6 +6,7 @@ import CertificatesSection from "@/components/CertificatesSection";
 import SkillsSection from "@/components/SkillsSection";
 import ContactForm from "@/components/ContactForm";
 import FloatingTools from "@/components/FloatingTools";
+import FloatingClouds from "@/components/FloatingClouds";
 
 export default async function HomePage() {
   let projects: any[] = [];
@@ -30,6 +31,8 @@ export default async function HomePage() {
   return (
     <div>
       <FloatingTools />
+
+      <FloatingClouds />
 
       <HeroSection />
 

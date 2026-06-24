@@ -105,7 +105,7 @@ export default function FloatingTools() {
             data-tile
             data-speed={tile.speed}
             data-rotate={tile.rotate}
-            className="absolute"
+            className="absolute pointer-events-auto group"
             style={{
               left: tile.x,
               top: tile.y,
@@ -113,10 +113,10 @@ export default function FloatingTools() {
             }}
           >
             <div
-              className={`${sizeMap[tile.size]} rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] flex items-center justify-center animate-float-${i % 3}`}
+              className={`${sizeMap[tile.size]} rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] flex items-center justify-center animate-float-${i % 3} transition-all duration-500 group-hover:scale-[2.5] group-hover:bg-white/[0.08] group-hover:border-accent/30 group-hover:shadow-lg group-hover:shadow-accent/10`}
               style={{ animationDelay: tile.animDelay, animationDuration: tile.animDuration }}
             >
-              <Icon className={`${iconSizeMap[tile.size]} text-white/15`} />
+              <Icon className={`${iconSizeMap[tile.size]} text-white/15 group-hover:text-accent transition-colors duration-500`} />
             </div>
           </div>
         );
