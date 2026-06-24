@@ -1,0 +1,13 @@
+.git
+.gitignore
+__pycache__
+*.pyc
+.env
+.next
+node_modules
+*.md
+*.mp4
+*.tsbuildinfo
+.venv
+.idea
+.vscode

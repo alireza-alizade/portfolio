@@ -66,28 +66,31 @@ export default function FloatingTools() {
     const els = containerRef.current?.querySelectorAll<HTMLElement>("[data-tile]");
     if (!els?.length) return;
 
-    let raf: number;
+    let ticking = false;
     let scrollY = 0;
 
-    const onScroll = () => { scrollY = window.scrollY; };
-
-    const animate = () => {
+    const update = () => {
       els.forEach((el) => {
         const speed = parseFloat(el.dataset.speed ?? "0.3");
         const baseRotate = parseFloat(el.dataset.rotate ?? "0");
-        const wobble = Math.sin(Date.now() / 2000 + baseRotate) * 3;
-        const ty = -scrollY * speed + Math.sin(Date.now() / 3000 + baseRotate) * 8;
-        el.style.transform = `translateY(${ty}px) rotate(${baseRotate + wobble}deg)`;
+        const ty = -scrollY * speed;
+        el.style.transform = `translateY(${ty}px) rotate(${baseRotate}deg)`;
       });
-      raf = requestAnimationFrame(animate);
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      scrollY = window.scrollY;
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    raf = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(raf);
     };
   }, []);
 
@@ -114,7 +117,7 @@ export default function FloatingTools() {
           >
             <div
               className={`${sizeMap[tile.size]} rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] flex items-center justify-center animate-float-${i % 3} transition-all duration-500 group-hover:scale-[2.5] group-hover:bg-white/[0.08] group-hover:border-accent/30 group-hover:shadow-lg group-hover:shadow-accent/10`}
-              style={{ animationDelay: tile.animDelay, animationDuration: tile.animDuration }}
+              style={{ animationDelay: tile.animDelay, animationDuration: tile.animDuration, willChange: "transform" }}
             >
               <Icon className={`${iconSizeMap[tile.size]} text-white/15 group-hover:text-accent transition-colors duration-500`} />
             </div>
